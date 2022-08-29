@@ -19,7 +19,7 @@ def return_status():
     if len(productname)==0:
         return jsonify(str("No name"))
     productname=""
-    return jsonify(str(responsea))
+    return jsonify(str("In process"))
 
 @app.route('/generateinstant')
 def return_status_sync():
