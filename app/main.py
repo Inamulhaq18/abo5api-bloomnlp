@@ -22,15 +22,14 @@ def return_status():
     return jsonify(str(responsea))
 
 @app.route('/generateinstant')
-def return_status():
-    """Return first the response and tie the my_task to a thread"""
+def return_status_sync():
     productname = (request.args.get('productname'))
     if len(productname)>0:
-        my_task(productname)
+        resp=my_task(productname)
     if len(productname)==0:
         return jsonify(str("No name"))
     productname=""
-    return jsonify(str("Images detected"))
+    return jsonify(str(resp))
 
 
 def my_task(productname):
