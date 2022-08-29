@@ -23,6 +23,8 @@ def return_status():
 
 def my_task(productname):
     print("rurl Before:  "+productname)
-    generate(productname)
+    responsea=generate(productname)
     print("rurl After:  "+productname)
+    print("_________________________")
+    print(responsea)
     return print('large function completed')
