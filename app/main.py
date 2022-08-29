@@ -2,29 +2,27 @@ import os
 from flask import Flask,jsonify,request
 import time
 from threading import Thread
-from bgprocess import *
+from textgeneration import *
 
 app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return "Welcome!"
+    return "Welcome to textgeneration API contact +966592012861"
 
-@app.route('/processBG')
+@app.route('/generate')
 def return_status():
     """Return first the response and tie the my_task to a thread"""
-    Rurl = (request.args.get('rurl'))
-    if len(Rurl)>0:
-        Thread(target = my_task,args=(Rurl,)).start()
-    if len(Rurl)==0:
-        return jsonify(str("No images"))
-    Rurl=""
+    productname = (request.args.get('productname'))
+    if len(productname)>0:
+        Thread(target = my_task,args=(productname,)).start()
+    if len(productname)==0:
+        return jsonify(str("No name"))
+    productname=""
     return jsonify(str("Images detected"))
 
-def my_task(rurl):
-    print("rurl Before:  "+rurl)
-    bgprocess(rurl)
-    print("rurl After:  "+rurl)
-    rurl=""
-    print("rurl After:  "+rurl)
+def my_task(productname):
+    print("rurl Before:  "+productname)
+    generate(productname)
+    print("rurl After:  "+productname)
     return print('large function completed')
