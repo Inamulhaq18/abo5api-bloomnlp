@@ -16,6 +16,7 @@ def pushdbupdate(productname,desc):
     
     curr.execute(sql_select_query, (desc,productname,))
     conn.commit()
+    print("productname____________________________"+productname)
     print("pushdb completed")
 
 def generate(productname):
