@@ -11,10 +11,11 @@ def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
 
-def pushdbupdate(productname,desc):
+def pushdbupdate(desc,productname):
     sql_select_query = """UPDATE master_product_table SET "Product_describtion_en" = %s WHERE "Product_Name_en" = %s"""
+
     
-    curr.execute(sql_select_query, ("test test",productname,))
+    curr.execute(sql_select_query, (desc,productname,))
     conn.commit()
     print("productname____________________________"+productname)
     print("pushdb completed")
@@ -50,6 +51,6 @@ def generate(productname):
                             }
         })
     desc=(output[0]["generated_text"]).replace(text,"")
-    pushdbupdate(productname,desc)
+    pushdbupdate(desc,productname)
 
     return(desc)
