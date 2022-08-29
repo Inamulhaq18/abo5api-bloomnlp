@@ -14,8 +14,8 @@ def query(payload):
 def pushdbupdate(desc,productname):
     sql_select_query = """UPDATE master_product_table SET "Product_describtion_en" = %s WHERE "Product_Name_en" = %s"""
 
-    
-    curr.execute(sql_select_query, (desc,productname,))
+    print(desc)
+    curr.execute(sql_select_query, (str(desc),productname,))
     conn.commit()
     print("productname____________________________"+productname)
     print("pushdb completed")
