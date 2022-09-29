@@ -1,8 +1,7 @@
 import requests
 import psycopg2
 
-conn=psycopg2.connect("postgresql://hkmuctkbhmlhsr:59563300aab6c650f8bbc9cc4153df6a42054b71e9be00dda420f40bbbf791b2@ec2-54-76-43-89.eu-west-1.compute.amazonaws.com:5432/dd8a5bspvhrk8c") 
-curr=conn.cursor()
+
 
 API_URL = "https://api-inference.huggingface.co/models/bigscience/bloom"
 headers = {"Authorization": "Bearer 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"}
@@ -12,11 +11,14 @@ def query(payload):
 	return response.json()
 
 def pushdbupdate(desc,productname):
+    conn=psycopg2.connect("postgresql://hkmuctkbhmlhsr:59563300aab6c650f8bbc9cc4153df6a42054b71e9be00dda420f40bbbf791b2@ec2-54-76-43-89.eu-west-1.compute.amazonaws.com:5432/dd8a5bspvhrk8c") 
+    curr=conn.cursor()
     sql_select_query = """UPDATE master_product_table SET "Product_describtion_en" = %s WHERE "Product_Name_en" = %s"""
 
     print(desc)
     curr.execute(sql_select_query, (str(desc),productname,))
     conn.commit()
+    conn.close()
     print("productname____________________________"+productname)
     print("pushdb completed")
 
